@@ -6,6 +6,12 @@ module Jekyll
       def initialize(config)
         Jekyll::External.require_with_graceful_fail "jekyll-pandoc"
 
+        # requires the Pandoc markdown converter
+        # install jekyll-pandoc gem and set "markdown: Pandoc" in _config.yml
+        unless config["markdown"] == "Pandoc"
+          raise Jekyll::Errors::FatalException, "Pandoc markdown converter required"
+        end
+
         @config = config
       end
 
@@ -24,8 +30,8 @@ module Jekyll
         # convert markdown into HTML table
         # uses pandoc with the grid_tables extension
         site = Jekyll::Site.new(@config)
-        mkconverter = site.find_converter_instance(::Jekyll::Converters::Markdown)
-        mkconverter.convert(content)
+        markdown_converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+        markdown_converter.convert(content)
       end
 
       def convert_csv(content)

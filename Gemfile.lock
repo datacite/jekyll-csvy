@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jekyll-csvy (0.1)
+    jekyll-csvy (0.2)
       jekyll (>= 3.0)
       jekyll-pandoc (~> 2.0, >= 2.0.0)
       pandoc-ruby (~> 2.0, >= 2.0.0)

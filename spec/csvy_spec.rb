@@ -32,4 +32,14 @@ describe Jekyll::Converters::Csvy do
       end
     end
   end
+
+  describe "instance methods with different markdown parser" do
+    subject { Jekyll::Converters::Csvy.new Jekyll::Configuration::DEFAULTS }
+
+    describe "convert" do
+      it "should raise error" do
+        expect { subject.convert(csv) }.to raise_error(Jekyll::Errors::FatalException, /Pandoc markdown converter required/)
+      end
+    end
+  end
 end
