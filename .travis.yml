@@ -1,23 +1,18 @@
 language: ruby
-
 rvm:
-  - 2.3.0
-
+- 2.3.0
 before_install:
 - wget https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb
 - sudo dpkg -i pandoc-1.15.2-1-amd64.deb
 - rm pandoc-1.15.2-1-amd64.deb
 - gem install bundler
-
 install:
-  - travis_retry bundle install
-
+- travis_retry bundle install
 script: bundle exec rspec
-
 deploy:
   provider: rubygems
   api_key:
-    secure: jA7MwRxyZn+teNdvbvv6JGzKUqF22OW1t84c4ETiV7YQBODm9Jara3I2+JNvdDoi7u3Mhv6R25TIxFS9fzllaCzxFl7MpyMR/cu4nLz2LTwrxbDxS6fzzKm2XtPEynEcIcF9GLH97Gub7jXOVQJFYKE93HexjoTFPL0vAxZ1ihg=
+    secure: J0HTOFNuWnqVInz+N8e93PQQQha4NWc2a3FEeRrE+5MHbmXGWIKz/f8I42KMpc9IgyMfhWnlA06zsV3uvxnkRJVNHRyJQztmg9JDEHj1TiCOiFJdhz2ls1+E2hUrCFsZI1Qbv1HCh6DX6qgEXgJNdwrKkgq8dSNiYXQmR6q0C0B52OAUdYhul/CO8Pj0c3HcSOcLSucXFEUthku2LQ3KREQxJxIyIHrApVb9+4CyuUVYhkdRj1vliaNIdVqSBwqnPkx0LUQ30ovnnEL96FLRy2AAAjIgH25XN5fvU30GstUYZTglgI/5U0QR9zvfgUWEFiq0h8ifIkDy3uq2Av04CqC1dLxQQpys+twHJNCn+g4rnt/t++MckuzG4ZTQOnMrs8607J8nPVUDpfJzPgISSUOqnlewhLDlzjZITNhNoC7TtiuNSLpbRlG7bjNscgNMKtU6F+ScD+y9lt1Xy+3ax8jo5PjkxIigM0Ph9WbfIKetRYBh+p4BuLfVMrMDj/fJ2rTS1Pm6D0cLhOOQnsng2TmMUcoZDRJmL5JRkOe4L55k2TAnmU1Y2wHF32t3JouTu+ch4ccxC4FOlQA9ngKkb+2H0AMiwRpIWdgKzx/wKLXdK+Tz6+/I2dGbY9Mhb3Su3aaqhfXlAtfKJvzj/EMSchUayYa33dUqVyDRur6o0F0=
   gem: jekyll-csvy
   on:
     tags: true
