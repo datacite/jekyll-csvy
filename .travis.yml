@@ -1,0 +1,24 @@
+language: ruby
+
+rvm:
+  - 2.3.0
+
+before_install:
+- wget https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb
+- sudo dpkg -i pandoc-1.15.2-1-amd64.deb
+- rm pandoc-1.15.2-1-amd64.deb
+- gem install bundler
+
+install:
+  - travis_retry bundle install
+
+script: bundle exec rspec
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: jA7MwRxyZn+teNdvbvv6JGzKUqF22OW1t84c4ETiV7YQBODm9Jara3I2+JNvdDoi7u3Mhv6R25TIxFS9fzllaCzxFl7MpyMR/cu4nLz2LTwrxbDxS6fzzKm2XtPEynEcIcF9GLH97Gub7jXOVQJFYKE93HexjoTFPL0vAxZ1ihg=
+  gem: jekyll-csvy
+  on:
+    tags: true
+    repo: datacite/jekyll-csvy
