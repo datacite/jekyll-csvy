@@ -1,7 +1,16 @@
 jekyll-csvy
 =============
 
-Jekyll-csvy converts CSV to markdown tables in the `grid-tables` format, which are then converted into HTML tables using [jekyll-pandoc](https://github.com/mfenner/jekyll-pandoc).
+[![Build Status](https://travis-ci.org/datacite/jekyll-csvy.svg?branch=master)](https://travis-ci.org/datacite/jekyll-csvy)
+
+Jekyll-csvy converts CSV to markdown tables in the `grid_tables` format, which are then converted into HTML tables using [jekyll-pandoc](https://github.com/mfenner/jekyll-pandoc).
+
+To use it with Jekyll, create files with the `csvy` extension that have a YAML header and CSV as body. The CSV should
+
+* have a header row
+* use a comma as delimiter
+
+Go to [http://csvy.org/](http://csvy.org/) to learn more about CSVY.
 
 ## Requirements
 
