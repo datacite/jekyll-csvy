@@ -29,9 +29,9 @@ module Jekyll
 
         # convert markdown into HTML table
         # uses pandoc with the grid_tables extension
-        site = Jekyll::Site.new(@config)
-        markdown_converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-        markdown_converter.convert(content)
+        # site = Jekyll::Site.new(@config)
+        # markdown_converter = site.find_converter_instance(Jekyll::Converters::Markdown)
+        # markdown_converter.convert(content)
       end
 
       def convert_csv(content)
