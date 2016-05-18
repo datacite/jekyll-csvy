@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Jekyll::Converters::Csvy do
+describe Jekyll::Csvy do
   let(:config) {{ 'markdown' => 'Pandoc',
                   'pandoc' => { 'format' => 'html', 'extensions' => [] }}}
   let(:csv) { File.read(File.expand_path("../example.csv", __FILE__)) }
@@ -8,7 +8,7 @@ describe Jekyll::Converters::Csvy do
   let(:html) { File.read(File.expand_path("../example.html", __FILE__)) }
 
   describe "class methods" do
-    subject { Jekyll::Converters::Csvy }
+    subject { Jekyll::Csvy }
 
     it "should initialize" do
       parser = subject.new(Jekyll::Configuration::DEFAULTS.merge(config))
@@ -17,7 +17,7 @@ describe Jekyll::Converters::Csvy do
   end
 
   describe "instance methods" do
-    subject { Jekyll::Converters::Csvy.new Jekyll::Configuration::DEFAULTS.merge(config) }
+    subject { Jekyll::Csvy.new Jekyll::Configuration::DEFAULTS.merge(config) }
 
     describe "convert" do
       it "should convert csv" do
@@ -34,7 +34,7 @@ describe Jekyll::Converters::Csvy do
   end
 
   describe "instance methods with different markdown parser" do
-    subject { Jekyll::Converters::Csvy.new Jekyll::Configuration::DEFAULTS }
+    subject { Jekyll::Csvy.new Jekyll::Configuration::DEFAULTS }
 
     describe "convert" do
       it "should raise error" do
