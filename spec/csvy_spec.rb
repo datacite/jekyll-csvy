@@ -26,8 +26,8 @@ describe Jekyll::Csvy do
     end
 
     describe "convert csv with multiple lines in a block" do
-      csv = "Header,Options\nOne,\"* 1\n* 2\n* 3\"\n"
-      html = "<table style=\"width:32%;\">\n<colgroup>\n<col width=\"12%\" />\n<col width=\"19%\" />\n</colgroup>\n<thead>\n<tr class=\"header\">\n<th align=\"left\">Header</th>\n<th align=\"left\">Options</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td align=\"left\"><p>One</p></td>\n<td align=\"left\"><ul>\n<li>1</li>\n<li>2</li>\n<li>3</li>\n</ul></td>\n</tr>\n</tbody>\n</table>\n"
+      csv = "Header,Options\nOne,\"Options:\n\n* 1\n* 2\n* 3\"\n"
+      html = "<table style=\"width:32%;\">\n<colgroup>\n<col width=\"12%\" />\n<col width=\"19%\" />\n</colgroup>\n<thead>\n<tr class=\"header\">\n<th align=\"left\">Header</th>\n<th align=\"left\">Options</th>\n</tr>\n</thead>\n<tbody>\n<tr class=\"odd\">\n<td align=\"left\"><p>One</p></td>\n<td align=\"left\"><p>Options:</p>\n<ul>\n<li>1</li>\n<li>2</li>\n<li>3</li>\n</ul></td>\n</tr>\n</tbody>\n</table>\n"
       it "should convert csv" do
         expect(subject.convert(csv)).to eq(html)
       end
