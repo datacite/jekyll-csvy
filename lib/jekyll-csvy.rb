@@ -38,6 +38,9 @@ module Jekyll
     def convert_csv(content)
       rows = ::CSV.parse(content)
 
+      # calculate max height of each row
+      max_heights = rows.map { |r| r.max_by { |x| x.lines.count }}.map { |r| r.lines.count }
+
       # calculate max width of each column
       columns = rows.transpose
       max_widths = columns.map { |c| c.max_by { |x| x.length }}.map { |c| c.length }
@@ -46,14 +49,12 @@ module Jekyll
       table = []
       table << separator_row(rows.first, max_widths)
 
-      # header row
-      table << content_row(rows.first, max_widths)
-      table << separator_row(rows.first, max_widths, delimiter = "=")
+      # rows
+      rows.each_with_index do |row,i|
+        delimiter = i == 0 ? "=" : "-"
 
-      # body rows
-      rows[1..-1].each do |row|
-        table << content_row(row, max_widths)
-        table << separator_row(row, max_widths)
+        table += content_rows(row, max_widths, max_heights[i])
+        table << separator_row(row, max_widths, delimiter)
       end
 
       table.join("\n") + "\n"
@@ -61,12 +62,20 @@ module Jekyll
       raise Jekyll::Errors::FatalException, "Conversion failed with error: #{e.message}"
     end
 
-    def content_row(row, max_widths)
-      row.each_with_index.reduce("|") { |sum, (x,i)| sum + ' ' + x + ' ' * (max_widths[i] - x.length) + " |" }
+    def content_rows(row, max_widths, max_height)
+      content_row = []
+      0.upto(max_height - 1) do |j|
+        content_row << row.each_with_index.reduce("|") do |sum, (x,i)|
+          sum + ' ' + x.lines[j].to_s.chomp + ' ' * (max_widths[i] - x.lines[j].to_s.chomp.length) + " |"
+        end
+      end
+      content_row
     end
 
     def separator_row(row, max_widths, delimiter = "-")
-      row.each_with_index.reduce("+") { |sum, (x,i)| sum + delimiter * (max_widths[i] + 2) + "+" }
+      row.each_with_index.reduce("+") do |sum, (x,i)|
+        sum + delimiter * (max_widths[i] + 2) + "+"
+      end
     end
   end
 end
